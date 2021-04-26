@@ -1,72 +1,90 @@
-import Head from 'next/head'
-import { Container, Row, Card, Button } from 'react-bootstrap'
+import Head from "next/head";
+import {
+  Container,
+  Row,
+  Card,
+  Button,
+  Form,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
 
 export default function Home() {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [viewerIsOpen, setViewerIsOpen] = useState(false);
+
+  const openLightbox = useCallback((event, { photo, index }) => {
+    setCurrentImage(index);
+    setViewerIsOpen(true);
+  }, []);
+
+  const closeLightbox = () => {
+    setCurrentImage(0);
+    setViewerIsOpen(false);
+  };
+
+  let gallery = props.gallery;
+  let nextSeoConfig = {
+    title: `${gallery.name} | Wandering Bong`,
+      description: `${gallery.description}`,
+    openGraph: {
+      url: `https://wanderingbong.com/galleries/${gallery.slug}`,
+      title: `${gallery.name} | Wandering Bong`,
+      description: `${gallery.description}`,
+      site_name: "Wandering Bong | Traveller | India",
+      images: props.images,
+    },
+    twitter: {
+      handle: "@aaghran",
+      site: "@site",
+      cardType: "summary_large_image",
+    },
+  };
   return (
     <Container className="md-container">
       <Head>
-        <title>ReactJS with react-bootstrap</title>
+        <title>Covid19 Twitter Resources search</title>
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
       <Container>
-        <h1>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-        <p>
-          Get started by editing <code>pages/index.js</code>
-        </p>
+        <h1>Covid19 Twitter Resources search</h1>
+        <p>{/* Get started by editing <code>pages/index.js</code> */}</p>
         <Container>
           <Row className="justify-content-md-between">
             <Card className="sml-card">
               <Card.Body>
-                <Card.Title>Documentation</Card.Title>
+                <Card.Title>Search</Card.Title>
+                <Card.Text>Choose City</Card.Text>
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text>C</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <FormControl
+                    id="inlineFormInputGroupUsername"
+                    placeholder="City"
+                  />
+                </InputGroup>
                 <Card.Text>
-                  Find in-depth information about Next.js features and API.
+                  <Form.Group controlId="exampleForm.ControlSelect2">
+                    <Form.Label>Select resources</Form.Label>
+                    <Form.Control as="select" multiple>
+                      <option>Beds</option>
+                      <option>ICU</option>
+                      <option>Oxygen</option>
+                      <option>Ventilator</option>
+                      <option>Tests</option>
+                      <option>Fabiflu</option>
+                      <option>Remdesivir</option>
+                      <option>Favipiravir</option>
+                      <option>Tocilizumab</option>
+                      <option>Plasma</option>
+                      <option>Food</option>
+                    </Form.Control>
+                  </Form.Group>
                 </Card.Text>
+
                 <Button variant="primary" href="https://nextjs.org/docs">
-                  More &rarr;
-                </Button>
-              </Card.Body>
-            </Card>
-            <Card className="sml-card">
-              <Card.Body>
-                <Card.Title>Learn</Card.Title>
-                <Card.Text>
-                  Learn about Next.js in an interactive course with quizzes!
-                </Card.Text>
-                <Button variant="primary" href="https://nextjs.org/learn">
-                  More &rarr;
-                </Button>
-              </Card.Body>
-            </Card>
-          </Row>
-          <Row className="justify-content-md-between">
-            <Card className="sml-card">
-              <Card.Body>
-                <Card.Title>Examples</Card.Title>
-                <Card.Text>
-                  Discover and deploy boilerplate example Next.js projects.
-                </Card.Text>
-                <Button
-                  variant="primary"
-                  href="https://github.com/vercel/next.js/tree/master/examples"
-                >
-                  More &rarr;
-                </Button>
-              </Card.Body>
-            </Card>
-            <Card className="sml-card">
-              <Card.Body>
-                <Card.Title>Deploy</Card.Title>
-                <Card.Text>
-                  Instantly deploy your Next.js site to a public URL with
-                  Vercel.
-                </Card.Text>
-                <Button
-                  variant="primary"
-                  href="https://vercel.com/new?utm_source=github&utm_medium=example&utm_campaign=next-example"
-                >
-                  More &rarr;
+                  View on Twitter &rarr;
                 </Button>
               </Card.Body>
             </Card>
@@ -74,16 +92,7 @@ export default function Home() {
         </Container>
       </Container>
 
-      <footer className="cntr-footer">
-        <a
-          href="https://vercel.com?filter=next.js&utm_source=github&utm_medium=example&utm_campaign=next-example"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="sml-logo" />
-        </a>
-      </footer>
+      <footer className="cntr-footer">Aaghran Ghosh</footer>
     </Container>
-  )
+  );
 }
