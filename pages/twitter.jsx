@@ -13,6 +13,7 @@ import {
 
 import NavBar from "../components/nav";
 import { Typeahead } from "react-bootstrap-typeahead";
+import Cities from "../data/cities.json";
 
 export default class Welcome extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ export default class Welcome extends React.Component {
       reqOptions: [],
       twitterlink: "",
       verified: true,
+      minFavs: 0,
     };
 
     this.setCitiesQuery = this.setCitiesQuery.bind(this);
@@ -35,7 +37,7 @@ export default class Welcome extends React.Component {
 
   componentDidMount() {
     this.setState({
-      citiesList: ["Bangalore", "Delhi", "Mumbai", "Hyderabad"],
+      citiesList: Cities.sort(),
       reqOptions: [
         "Beds",
         "ICU",
@@ -47,6 +49,19 @@ export default class Welcome extends React.Component {
         "Plasma",
         "Food",
       ],
+      requirementsQuery: [
+        "Beds",
+        "ICU",
+        "Oxygen",
+        "Ventilator",
+        "Tests",
+        "Fabiflu",
+        "Remdesivir",
+        "Plasma",
+        "Food",
+      ],
+      minFavs: 5,
+      citiesQuery: ["Bangalore"],
     });
     this.setTwitterlink();
   }
@@ -58,13 +73,18 @@ export default class Welcome extends React.Component {
     this.setTwitterlink();
   }
 
-  setCitiesQuery(city) {
-    let selectedCity = city.toString();
-    console.log(selectedCity);
+  setFavs(event) {
     this.setState({
-      citiesQuery: selectedCity,
+      minFavs: event.value,
     });
-    // console.log(this.state);
+    this.setTwitterlink();
+  }
+
+  setCitiesQuery(city) {
+    this.setState({
+      citiesQuery: city,
+    });
+    console.log(this.state);
     this.setTwitterlink();
   }
 
@@ -88,10 +108,10 @@ export default class Welcome extends React.Component {
     let fixedString =
       "-%22not+verified%22+-%22unverified%22+-%22needed%22+-%22need%22+-%22needs%22+-%22required%22+-%22require%22+-%22requires%22+-%22requirement%22+-%22requirements%22";
     let requirementsString = this.state.requirementsQuery.join("+OR+");
-    let favs = "min_faves:10";
+    let favs = `min_faves:${this.state.minFavs}`;
     let live = "&lf=on";
     let verified = this.state.verified ? "verified" : "";
-    let queryTemplate = `${verified}+${this.state.citiesQuery}+(${requirementsString})+${fixedString}+${favs}&f=live${live}`;
+    let queryTemplate = `${verified}+${this.state.citiesQuery.toString()}+(${requirementsString})+${fixedString}+${favs}&f=live${live}`;
 
     this.setState({
       twitterlink: url + queryTemplate,
@@ -118,10 +138,10 @@ export default class Welcome extends React.Component {
                   <Typeahead
                     id="basic-typeahead-multiple"
                     labelKey="name"
-                    single
                     onChange={this.setCitiesQuery}
                     options={this.state.citiesList}
                     placeholder={"Choose city"}
+                    selected={this.state.citiesQuery}
                   />
                 </Form.Group>
 
@@ -138,9 +158,9 @@ export default class Welcome extends React.Component {
                         id={`inline-checkbox-${type}`}
                         key={`inline-checkbox-${type}`}
                         value={type}
-                        // defaultChecked={this.state.requirementsQuery.includes(
-                        //   type
-                        // )}
+                        defaultChecked={this.state.requirementsQuery.includes(
+                          type
+                        )}
                         onChange={this.setRequirementsQuery}
                       />
                     ))}
@@ -162,13 +182,14 @@ export default class Welcome extends React.Component {
                       inline
                       label={""}
                       type="checkbox"
-                      className="p-2"
+                      className="p-0"
                       id={`inline-checkbox-verified`}
                       defaultChecked={this.state.verified}
                       onChange={this.setVerified}
                     />
-                    Show only verified tweets (Can try unchecking this for
-                    smaller cities if you don't see results)
+                    Show only verified tweets
+                    <br /> (Can try unchecking this for smaller cities if you
+                    don't see results)
                   </ListGroup.Item>
                   <ListGroup.Item>
                     {" "}
