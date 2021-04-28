@@ -19,36 +19,7 @@ export default class Welcome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      citiesQuery: "",
-      citiesList: [],
-      requirementsQuery: [],
-      reqQuery: "",
-      reqOptions: [],
-      twitterlink: "",
-      verified: true,
-      minFavs: 0,
-    };
-
-    this.setCitiesQuery = this.setCitiesQuery.bind(this);
-    this.setRequirementsQuery = this.setRequirementsQuery.bind(this);
-    this.setTwitterlink = this.setTwitterlink.bind(this);
-    this.setVerified = this.setVerified.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({
       citiesList: Cities.sort(),
-      reqOptions: [
-        "Beds",
-        "ICU",
-        "Oxygen",
-        "Ventilator",
-        "Tests",
-        "Fabiflu",
-        "Remdesivir",
-        "Plasma",
-        "Food",
-      ],
       requirementsQuery: [
         "Beds",
         "ICU",
@@ -60,46 +31,76 @@ export default class Welcome extends React.Component {
         "Plasma",
         "Food",
       ],
+      reqQuery: "",
+      reqOptions: [
+        "Beds",
+        "ICU",
+        "Oxygen",
+        "Ventilator",
+        "Tests",
+        "Fabiflu",
+        "Remdesivir",
+        "Plasma",
+        "Food",
+      ],
+      twitterlink: "",
+      verified: true,
       minFavs: 5,
       citiesQuery: ["Bangalore"],
-    });
+    };
+
+    this.setCitiesQuery = this.setCitiesQuery.bind(this);
+    this.setRequirementsQuery = this.setRequirementsQuery.bind(this);
+    this.setTwitterlink = this.setTwitterlink.bind(this);
+    this.setVerified = this.setVerified.bind(this);
+  }
+
+  componentDidMount() {
     this.setTwitterlink();
   }
 
   setVerified() {
-    this.setState({
-      verified: this.state.verified,
-    });
-    this.setTwitterlink();
+    this.setState(
+      {
+        verified: this.state.verified,
+      },
+      this.setTwitterlink
+    );
   }
 
   setFavs(event) {
-    this.setState({
-      minFavs: event.value,
-    });
-    this.setTwitterlink();
+    this.setState(
+      {
+        minFavs: event.value,
+      },
+      this.setTwitterlink
+    );
   }
 
   setCitiesQuery(city) {
-    this.setState({
-      citiesQuery: city,
-    });
-    console.log(this.state);
-    this.setTwitterlink();
+    this.setState(
+      {
+        citiesQuery: city,
+      },
+      this.setTwitterlink
+    );
   }
 
   setRequirementsQuery(event) {
+    debugger;
     let value = event.target.value;
     console.log("-------", this.state.requirementsQuery);
     console.log("value ", value);
-    this.state.requirementsQuery.indexOf(value) === -1
-      ? this.state.requirementsQuery.push(value)
-      : this.state.requirementsQuery.pop(value);
-    this.setState({
-      requirementsQuery: this.state.requirementsQuery,
-    });
-    console.log(this.state.requirementsQuery);
-    this.setTwitterlink();
+    let temp = [...this.state.requirementsQuery];
+    temp.includes(value)
+      ? temp.splice(temp.indexOf(value), 1)
+      : temp.push(value);
+    this.setState(
+      {
+        requirementsQuery: temp,
+      },
+      this.setTwitterlink
+    );
   }
 
   setTwitterlink() {
