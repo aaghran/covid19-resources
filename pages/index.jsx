@@ -45,7 +45,7 @@ export default function Home() {
                   <br /><br />
                   Here is a simple and quick tool to search for resources or leads based on a city or requirement. 
                 </Card.Text>
-                <Button variant="primary" href="/twitter">
+                <Button variant="primary" href="/twitter-search">
                   Search Twitter &rarr;
                 </Button>
               </Card.Body>
