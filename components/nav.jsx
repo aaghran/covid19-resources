@@ -24,10 +24,10 @@ const Menu = (props) => {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/twitter">Search on Twitter</NavLink>
+                <NavLink href="/twitter-search">Search on Twitter</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/search">Search By City</NavLink>
+                <NavLink href="/city-search">Search By City</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

@@ -159,13 +159,28 @@ export default class Welcome extends React.Component {
         <NavBar />
         <Container className="" fluild>
           <Row className="justify-content-md-between mt-2 mb-2">
-            <Col sm="12" lg="6">
+            <Col sm="12">
               <h1>Covid19 Twitter Resources Search tool</h1>
               <p>
-                Help search verfiied leads for covid related resources via
-                Twitter
+                As the global community faces the COVID-19 pandemic together,
+                Twitter is helping people find reliable information, connect
+                with others, and follow what’s happening in real time.
               </p>
-
+              <p>
+                This is a simple tool to find resources and leads in Twitter
+                based on your city or need.
+              </p>
+              <hr></hr>
+              <p>
+                <b>
+                  Do NOT make advanced payments. Always check authenticity
+                  before any payments.
+                </b>
+                <br />
+                Check for replies under the tweets
+              </p>
+            </Col>
+            <Col sm="12" lg="6">
               <Card className="">
                 <Card.Body>
                   <Card.Title>Search</Card.Title>
@@ -236,6 +251,17 @@ export default class Welcome extends React.Component {
                       Needed & Required words filtered out
                     </ListGroup.Item>
                   </ListGroup>
+                  <Card.Text className="p-2">
+                    In the past few weeks, people have been desperately turning
+                    to Twitter asking for leads regarding Covid resources such
+                    as oxygen cylinders, covid beds and other assistance like
+                    meals for patients, academic help and ccommute.
+                    <br />
+                    <br />
+                    There is a lot of information present on the microblogging
+                    site and sometimes it becomes difficult to filter through
+                    it, as the information could be old or unverified.
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
