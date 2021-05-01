@@ -10,10 +10,10 @@ module.exports = withPlugins([
       strip: true,
       verbose: true,
     },
-    imagesPublicPath: '/covid19-resources/_next/static/images/',
+    //imagesPublicPath: '/covid19-toolkit/_next/static/images/',
   }],
   {
-    basePath: '/covid19-resources',
-    assetPrefix: '/covid19-resources/'
+    // basePath: '/covid19-toolkit',
+    // assetPrefix: '/covid19-toolkit/'
   },
 ]);
