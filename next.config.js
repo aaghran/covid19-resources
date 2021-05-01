@@ -14,7 +14,6 @@ module.exports = withPlugins([
   }],
   {
     basePath: '/covid19-resources',
-    assetPrefix: '/covid19-resources/',
-    env,
+    assetPrefix: '/covid19-resources/'
   },
 ]);

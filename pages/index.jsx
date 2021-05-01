@@ -25,7 +25,7 @@ export default function Home() {
         <p>{/* Get started by editing <code>pages/index.js</code> */}</p>
         <Container>
           <Row className="justify-content-md-between">
-          <Button variant="primary" href="/twitter">
+          <Button variant="primary" href="/covid19-resources/twitter">
                   Search Twitter &rarr;
                 </Button>
           </Row>
