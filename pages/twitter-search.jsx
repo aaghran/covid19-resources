@@ -10,6 +10,7 @@ import {
   FormControl,
   ListGroup,
   Col,
+  Alert,
 } from "react-bootstrap";
 
 const topCities = [
@@ -32,7 +33,7 @@ import NavBar from "../components/nav";
 import { Typeahead } from "react-bootstrap-typeahead";
 import Cities from "../data/cities.json";
 
-export default class Welcome extends React.Component {
+export default class Twitter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -153,8 +154,49 @@ export default class Welcome extends React.Component {
     return (
       <Fragment>
         <Head>
-          <title>Covid19 Twitter Resources search</title>
-          <link rel="icon" href="/favicon-32x32.png" />
+          <title>Covid19 Twitter Search</title>
+          <meta name="title" content="Covid19 Twitter Search" />
+          <meta
+            name="description"
+            content="As the global community faces the COVID-19 pandemic together, Twitter is helping people find reliable information, connect with others, and follow what’s happening in real time.
+This is a simple tool to find resources and leads in Twitter based on your city or need."
+          />
+
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://covid19.aaghran.com/" />
+          <meta property="og:title" content="Covid19 Twitter Search" />
+          <meta
+            property="og:description"
+            content="As the global community faces the COVID-19 pandemic together, Twitter is helping people find reliable information, connect with others, and follow what’s happening in real time.
+This is a simple tool to find resources and leads in Twitter based on your city or need."
+          />
+          <meta
+            property="og:image"
+            content="https://wanderingbong-v2.s3.ap-south-1.amazonaws.com/bg-covid.webp"
+          />
+
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content="https://covid19.aaghran.com/" />
+          <meta property="twitter:title" content="Covid19 Twitter Search" />
+          <meta
+            property="twitter:description"
+            content="As the global community faces the COVID-19 pandemic together, Twitter is helping people find reliable information, connect with others, and follow what’s happening in real time.
+
+This is a simple tool to find resources and leads in Twitter based on your city or need."
+          />
+          <meta
+            property="twitter:image"
+            content="https://wanderingbong-v2.s3.ap-south-1.amazonaws.com/bg-covid.webp"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KFXF3TG');`,
+            }}
+          ></script>
         </Head>
         <NavBar />
         <Container className="" fluild>
@@ -172,12 +214,10 @@ export default class Welcome extends React.Component {
               </p>
               <hr></hr>
               <p>
-                <b>
+                <Alert variant="warning">
                   Do NOT make advanced payments. Always check authenticity
                   before any payments.
-                </b>
-                <br />
-                Check for replies under the tweets
+                </Alert>
               </p>
             </Col>
             <Col sm="12" lg="6">
@@ -226,7 +266,7 @@ export default class Welcome extends React.Component {
                   >
                     View on Twitter &rarr;
                   </Button>
-
+                  <p>Check for replies under the tweets</p>
                   <ListGroup>
                     <ListGroup.Item>
                       <Form.Check
