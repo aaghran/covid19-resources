@@ -9,7 +9,7 @@ import {
   InputGroup,
   FormControl,
   ListGroup,
-  Col
+  Col,
 } from "react-bootstrap";
 
 const topCities = [
@@ -157,85 +157,89 @@ export default class Welcome extends React.Component {
           <link rel="icon" href="/favicon-32x32.png" />
         </Head>
         <NavBar />
-        <Container className="md-container">
-          <h1>Covid19 Twitter Resources search</h1>
-          <p>{/* Get started by editing <code>pages/index.js</code> */}</p>
-          <Row className="justify-content-md-between p-4">
-            <Card className="">
-              <Card.Body>
-                <Card.Title>Search</Card.Title>
-                <Card.Text>Choose City</Card.Text>
-                <Form.Group>
-                  <Typeahead
-                    id="basic-typeahead-multiple"
-                    labelKey="name"
-                    onChange={this.setCitiesQuery}
-                    options={this.state.citiesList}
-                    placeholder={"Choose city"}
-                    selected={this.state.citiesQuery}
-                  />
-                </Form.Group>
+        <Container className="" fluild>
+          <Row className="justify-content-md-between mt-2 mb-2">
+            <Col sm="12" lg="6">
+              <h1>Covid19 Twitter Resources Search tool</h1>
+              <p>
+                Help search verfiied leads for covid related resources via
+                Twitter
+              </p>
 
-                <Form.Group>
-                  <Form.Label>Select resources</Form.Label>
-                  <br />
-                  <Fragment>
-                    {this.state.reqOptions.map((type) => (
+              <Card className="">
+                <Card.Body>
+                  <Card.Title>Search</Card.Title>
+                  <Card.Text>Choose City</Card.Text>
+                  <Form.Group>
+                    <Typeahead
+                      id="basic-typeahead-multiple"
+                      labelKey="name"
+                      onChange={this.setCitiesQuery}
+                      options={this.state.citiesList}
+                      placeholder={"Choose city"}
+                      selected={this.state.citiesQuery}
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Select resources</Form.Label>
+                    <br />
+                    <Fragment>
+                      {this.state.reqOptions.map((type) => (
+                        <Form.Check
+                          inline
+                          label={type}
+                          type="checkbox"
+                          className="p-2"
+                          id={`inline-checkbox-${type}`}
+                          key={`inline-checkbox-${type}`}
+                          value={type}
+                          defaultChecked={this.state.requirementsQuery.includes(
+                            type
+                          )}
+                          onChange={this.setRequirementsQuery}
+                        />
+                      ))}
+                    </Fragment>
+                  </Form.Group>
+
+                  <Button
+                    variant="primary"
+                    href={this.state.twitterlink}
+                    target="_blank"
+                    className="mb-4"
+                  >
+                    View on Twitter &rarr;
+                  </Button>
+
+                  <ListGroup>
+                    <ListGroup.Item>
                       <Form.Check
                         inline
-                        label={type}
+                        label={""}
                         type="checkbox"
-                        className="p-2"
-                        id={`inline-checkbox-${type}`}
-                        key={`inline-checkbox-${type}`}
-                        value={type}
-                        defaultChecked={this.state.requirementsQuery.includes(
-                          type
-                        )}
-                        onChange={this.setRequirementsQuery}
+                        className="p-0"
+                        id={`inline-checkbox-verified`}
+                        defaultChecked={this.state.verified}
+                        onChange={this.setVerified}
                       />
-                    ))}
-                  </Fragment>
-                </Form.Group>
-
-                <Button
-                  variant="primary"
-                  href={this.state.twitterlink}
-                  target="_blank"
-                  className="mb-4"
-                >
-                  View on Twitter &rarr;
-                </Button>
-
-                <ListGroup>
-                  <ListGroup.Item>
-                    <Form.Check
-                      inline
-                      label={""}
-                      type="checkbox"
-                      className="p-0"
-                      id={`inline-checkbox-verified`}
-                      defaultChecked={this.state.verified}
-                      onChange={this.setVerified}
-                    />
-                    Show only verified tweets
-                    <br /> (Can try unchecking this for smaller cities if you
-                    don't see results)
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    {" "}
-                    Unverified tweets excluded (Tweet should not contain "not
-                    verified" and "unverified")
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    Needed & Required words filtered out
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card.Body>
-            </Card>
-          </Row>
-          <Row className="justify-content-md-between">
-            <Col sm="12">
+                      Show only verified tweets
+                      <br /> (Can try unchecking this for smaller cities if you
+                      don't see results)
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      {" "}
+                      Unverified tweets excluded (Tweet should not contain "not
+                      verified" and "unverified")
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      Needed & Required words filtered out
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col sm="12" lg="6">
               <Card className="">
                 <Card.Body>
                   <Card.Title>Frequently Searched Cities</Card.Title>
