@@ -239,7 +239,7 @@ There is a lot of information present on the microblogging site and sometimes it
           </Container>
         </Container>
 
-        <footer className="cntr-footer">© Aaghran Ghosh - 2021</footer>
+        <footer className="cntr-footer">© <a href="https://aaghran.com/">Aaghran Ghosh</a> - 2021</footer>
       </Fragment>
     );
   }

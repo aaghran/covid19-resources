@@ -322,7 +322,7 @@ This is a simple tool to find resources and leads in Twitter based on your city 
           </Row>
         </Container>
 
-        <footer className="cntr-footer">© Aaghran Ghosh - 2021</footer>
+        <footer className="cntr-footer">© <a href="https://aaghran.com/">Aaghran Ghosh</a> - 2021</footer>
       </Fragment>
     );
   }
