@@ -20,15 +20,8 @@ const topCities = [
   "Pune",
   "Mumbai",
   "Bangalore",
-  "Thane",
-  "Hyderabad",
   "Nagpur",
-  "Lucknow",
-  "Ahmedabad",
-  "Chennai",
-  "Kolkata",
-  "Goa",
-  "Jaipur",
+  "Kolkata"
 ];
 
 export default class Index extends React.Component {
@@ -93,7 +86,7 @@ There is a lot of information present on the microblogging site and sometimes it
                   <br /> <br />
                   <b>NOTE:</b> Any information here is not official.
                 </p>
-                <Button variant="primary" href="/twitter-search">
+                <Button variant="outline-primary" href="/twitter-search">
                   Search Twitter &rarr;
                 </Button>
               </Col>
@@ -117,7 +110,7 @@ There is a lot of information present on the microblogging site and sometimes it
                       Here is a simple and quick tool to search for resources or
                       leads based on a city or requirement.
                     </Card.Text>
-                    <Button variant="primary" href="/twitter-search">
+                    <Button variant="primary" href="/twitter-search"  size="lg" block>
                       Search Twitter &rarr;
                     </Button>
                   </Card.Body>

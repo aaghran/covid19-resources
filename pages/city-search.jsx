@@ -14,7 +14,7 @@ import {
 
 import NavBar from "../components/nav";
 import { Typeahead } from "react-bootstrap-typeahead";
-import Cities from "../data/cities.json";
+const topCities = ["Delhi", "Pune", "Mumbai", "Bangalore", "Nagpur", "Kolkata"];
 
 export default class Welcome extends React.Component {
   constructor(props) {
@@ -38,7 +38,22 @@ export default class Welcome extends React.Component {
             <br /> We will keep updating the content
           </p>
           <Row>
-            <Col sm="12">Test</Col>
+            <Col sm="12">
+              <Card className="">
+                <Card.Body>
+                  <Card.Title>Search resources by City</Card.Title>
+                  <Card.Text className="p-2">
+                    <ListGroup>
+                      {topCities.map((city) => (
+                        <ListGroup.Item>
+                          <a href={`/cities/${city}`}>{city}</a>
+                        </ListGroup.Item>
+                      ))}
+                    </ListGroup>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
           </Row>
         </Container>
 
