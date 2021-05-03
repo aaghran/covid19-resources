@@ -26,7 +26,7 @@ export default class Welcome extends React.Component {
     return (
       <Fragment>
         <Head>
-          <title>Covid19 Twitter Resources search</title>
+          <title>Covid19 City wise resources and links</title>
           <link rel="icon" href="/favicon-32x32.png" />
         </Head>
         <NavBar />

@@ -15,14 +15,7 @@ import {
 import NavBar from "../components/nav";
 import Image from "next/image";
 
-const topCities = [
-  "Delhi",
-  "Pune",
-  "Mumbai",
-  "Bangalore",
-  "Nagpur",
-  "Kolkata"
-];
+const topCities = ["Delhi", "Pune", "Mumbai", "Bangalore", "Nagpur", "Kolkata"];
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -78,7 +71,7 @@ There is a lot of information present on the microblogging site and sometimes it
         <Container>
           <Container fluid>
             <Row className="justify-content-md-between">
-              <Col sm="12">
+              <Col sm="12" className="mb-2">
                 <h1 className="mt-2">Covid19 Resources wiki</h1>
                 <p>
                   This is an informational site for covid created on a personal
@@ -86,7 +79,12 @@ There is a lot of information present on the microblogging site and sometimes it
                   <br /> <br />
                   <b>NOTE:</b> Any information here is not official.
                 </p>
-                <Button variant="outline-primary" href="/twitter-search">
+                <p>
+                  <a href="https://www.covid19india.org" target="blank">Covid19 cases</a>
+                  <br />A volunteer-driven crowdsourced effort to track the coronavirus in India.
+                </p>
+                <span>Quick links: </span>
+                <Button variant="outline-primary" href="/twitter-search" className="ml-2">
                   Search Twitter &rarr;
                 </Button>
               </Col>
@@ -110,7 +108,12 @@ There is a lot of information present on the microblogging site and sometimes it
                       Here is a simple and quick tool to search for resources or
                       leads based on a city or requirement.
                     </Card.Text>
-                    <Button variant="primary" href="/twitter-search"  size="lg" block>
+                    <Button
+                      variant="primary"
+                      href="/twitter-search"
+                      size="lg"
+                      block
+                    >
                       Search Twitter &rarr;
                     </Button>
                   </Card.Body>
@@ -224,7 +227,6 @@ There is a lot of information present on the microblogging site and sometimes it
                         </a>
                       </ListGroup.Item>
                     </Card.Text>
-                    ;
                   </Card.Body>
                 </Card>
               </Col>
@@ -232,7 +234,9 @@ There is a lot of information present on the microblogging site and sometimes it
           </Container>
         </Container>
 
-        <footer className="cntr-footer">© <a href="https://aaghran.com/">Aaghran Ghosh</a> - 2021</footer>
+        <footer className="cntr-footer">
+          © <a href="https://aaghran.com/">Aaghran Ghosh</a> - 2021
+        </footer>
       </Fragment>
     );
   }

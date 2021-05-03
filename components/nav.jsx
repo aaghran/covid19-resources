@@ -19,7 +19,7 @@ const Menu = (props) => {
     <div>
       <Navbar color="dark" expand="md" className="" fixed>
         <Container>
-          <NavbarBrand className="text-white" href="/">Covid19-Resources</NavbarBrand>
+          <NavbarBrand className="text-white" href="/twitter-search">Covid19-Resources</NavbarBrand>
           <NavbarToggler onClick={toggle} className="text-white" />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
@@ -27,7 +27,7 @@ const Menu = (props) => {
                 <NavLink href="/twitter-search">Search on Twitter</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/city-search">Search By City</NavLink>
+                <NavLink href="/vaccine-slots">Check Vaccine slots</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

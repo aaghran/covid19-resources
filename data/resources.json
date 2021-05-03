@@ -1,0 +1,68 @@
+{
+    "data": {
+      "citiesCovids": [
+        {
+          "name": "Delhi",
+          "description": "Delhi",
+          "active_cases": null,
+          "slug": "delhi",
+          "hospitals": []
+        },
+        {
+          "name": "Pune",
+          "description": "Pune",
+          "active_cases": null,
+          "slug": "pune",
+          "hospitals": []
+        },
+        {
+          "name": "Mumbai",
+          "description": "Mumbai",
+          "active_cases": null,
+          "slug": "mumbai",
+          "hospitals": []
+        },
+        {
+          "name": "Bangalore",
+          "description": "Bangalore",
+          "active_cases": null,
+          "slug": "bangalore",
+          "hospitals": [
+            {
+              "name": "Links from life.coronasafe.network",
+              "link": "https://life.coronasafe.network/karnataka/bengaluru_(bangalore)_urban/oxygen",
+              "description": "Links from life.coronasafe.network",
+              "source_link": "https://life.coronasafe.network"
+            },
+            {
+              "name": "oxygenblr",
+              "link": "https://oxygenblr.in/",
+              "description": "https://oxygenblr.in/",
+              "source_link": "https://oxygenblr.in/"
+            }
+          ]
+        },
+        {
+          "name": "Nagpur",
+          "description": "Nagpur",
+          "active_cases": null,
+          "slug": "nagpur",
+          "hospitals": []
+        },
+        {
+          "name": "Kolkata",
+          "description": "Kolkata",
+          "active_cases": null,
+          "slug": "kolkata",
+          "hospitals": [
+            {
+              "name": "life.coronasafe.network Oxygen",
+              "link": "https://life.coronasafe.network/west_bengal/kolkata/oxygen",
+              "description": "https://life.coronasafe.network/west_bengal/kolkata/oxygen",
+              "source_link": "https://life.coronasafe.network/west_bengal/kolkata/oxygen"
+            }
+          ]
+        }
+      ]
+    }
+  }

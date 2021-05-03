@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -10,6 +10,8 @@ import {
   FormControl,
   Col,
   ListGroup,
+  Tabs,
+  Tab,
 } from "react-bootstrap";
 
 import NavBar from "../../../components/nav";
@@ -17,20 +19,34 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const topCities = ["Delhi", "Pune", "Mumbai", "Bangalore", "Nagpur", "Kolkata"];
+import data from "../../../data/resources.json";
 
 const Cities = () => {
   const router = useRouter();
   const { city } = router.query;
+  const [key, setKey] = useState("hospitals");
+
+  console.log(city);
+  let cityData = [];
+  useEffect(
+    () => {
+      cityData = data.data.citiesCovids.filter(function (i, n) {
+        return n.slug == city;
+      });
+    },
+    city,
+    cityData
+  );
+  console.log(cityData);
 
   return (
     <>
       <Head>
-        <title>Covid19 Resources wiki</title>
-        <meta name="title" content="Covid19 Resources wiki" />
+        <title>{city} Covid19 links and resources</title>
+        <meta name="title" content={`${city} Covid19 links and resources`} />
         <meta
           name="description"
-          content="In the past few weeks, people have been desperately turning to Twitter asking for leads regarding Covid resources such as oxygen cylinders, covid beds and other assistance like meals for patients, academic help and ccommute. There is a lot of information present on the microblogging site and sometimes it becomes difficult to filter through it, as the information could be old or unverified."
+          content={`${city} Covid19 links and resources`}
         />
 
         <meta property="og:type" content="website" />
@@ -38,7 +54,7 @@ const Cities = () => {
         <meta property="og:title" content="Covid19 Resources wiki" />
         <meta
           property="og:description"
-          content="In the past few weeks, people have been desperately turning to Twitter asking for leads regarding Covid resources such as oxygen cylinders, covid beds and other assistance like meals for patients, academic help and ccommute.There is a lot of information present on the microblogging site and sometimes it becomes difficult to filter through it, as the information could be old or unverified."
+          content={`${city} Covid19 links and resources`}
         />
         <meta
           property="og:image"
@@ -50,8 +66,7 @@ const Cities = () => {
         <meta property="twitter:title" content="Covid19 Resources wiki" />
         <meta
           property="twitter:description"
-          content="In the past few weeks, people have been desperately turning to Twitter asking for leads regarding Covid resources such as oxygen cylinders, covid beds and other assistance like meals for patients, academic help and ccommute.
-There is a lot of information present on the microblogging site and sometimes it becomes difficult to filter through it, as the information could be old or unverified."
+          content={`${city} Covid19 links and resources`}
         />
         <meta
           property="twitter:image"
@@ -72,7 +87,7 @@ There is a lot of information present on the microblogging site and sometimes it
         <Container fluid>
           <Row className="justify-content-md-between">
             <Col sm="12">
-              <h1 className="mt-2">{city}</h1>
+              <h1 className="mt-2">{`${city} Covid19 links and resources`}</h1>
               <p>
                 This is an informational site for covid created on a personal
                 capacity.
@@ -83,7 +98,53 @@ There is a lot of information present on the microblogging site and sometimes it
             <Col sm="12" lg="6" className="mt-2">
               <Card className="">
                 <Card.Body>
-                  <Card.Title>Quick search tool for Twitter</Card.Title>
+                  <Card.Title>Important Links</Card.Title>
+                  <Card.Text className="p-2">Covid guide - Instagram</Card.Text>
+                  <Tabs
+                    id="controlled-tab-example"
+                    activeKey={key}
+                    onSelect={(k) => setKey(k)}
+                  >
+                    <Tab eventKey="hospitals" title="Hospitals">
+                      <Card.Body className="p-2">
+                        Covid guide - Instagram
+                      </Card.Body>
+                    </Tab>
+                    <Tab eventKey="Oxygen" title="Oxygen">
+                      <Card.Body className="p-2">Oxygen</Card.Body>
+                    </Tab>
+                  </Tabs>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col sm="12" lg="6" className="mt-2">
+              <Card className="">
+                <Card.Body>
+                  <Card.Title>Covid Dashboards</Card.Title>
+                  <Card.Text className="p-2"></Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col sm="12" lg="6" className="mt-2">
+              <Card className="">
+                <Card.Body>
+                  <Card.Title>Important Phone Numbers</Card.Title>
+                  <Card.Text className="p-2"></Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col sm="12" lg="6" className="mt-2">
+              <Card className="">
+                <Card.Body>
+                  <Card.Title>Twitter</Card.Title>
+                  <Card.Text className="p-2"></Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col sm="12" lg="6" className="mt-2">
+              <Card className="">
+                <Card.Body>
+                  <Card.Title>Vaccination</Card.Title>
                   <Card.Text className="p-2"></Card.Text>
                 </Card.Body>
               </Card>
