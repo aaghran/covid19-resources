@@ -1,19 +1,13 @@
-const withPlugins = require('next-compose-plugins');
-const optimizedImages = require('next-optimized-images');
-module.exports = withPlugins([
-  [optimizedImages, {
-    mozjpeg: {
-      quality: 80,
-    },
-    pngquant: {
-      speed: 3,
-      strip: true,
-      verbose: true,
-    },
-    //imagesPublicPath: '/covid19-toolkit/_next/static/images/',
-  }],
-  {
-    // basePath: '/covid19-toolkit',
-    // assetPrefix: '/covid19-toolkit/'
+const path = require("path");
+const withSass = require("@zeit/next-sass");
+module.exports = withSass({
+  /* bydefault config  option Read For More Optios
+here https://github.com/vercel/next-plugins/tree/master/packages/next-sass*/
+  cssModules: true,
+});
+module.exports = {
+  /* Add Your Scss File Folder Path Here */
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
   },
-]);
+};

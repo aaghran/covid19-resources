@@ -20,8 +20,8 @@ import filterFactory, {
 } from "react-bootstrap-table2-filter";
 
 const selectOptions = {
-  No: "No",
-  Yes: "Yes",
+  Free: "Free",
+  Paid: "Paid",
 };
 
 const columns = [
@@ -42,6 +42,10 @@ const columns = [
     dataField: "fee_type",
     text: "Fee Type",
     sort: true,
+    formatter: (cell) => selectOptions[cell],
+    filter: selectFilter({
+      options: selectOptions,
+    }),
   },
   {
     dataField: "session",
@@ -78,7 +82,8 @@ function sessionsFormatter(cell, row) {
           <Alert variant="success" className="p-0">
             <Badge>{session.date}</Badge>
             <Badge>Age - {session.min_age_limit}</Badge>
-            Slots - <Badge variant="dark"> {session.available_capacity}</Badge>
+            <Badge variant="">{session.vaccine}</Badge> -{" "}
+            <Badge variant="dark"> {session.available_capacity}</Badge>
           </Alert>
         </>
       ))}

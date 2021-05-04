@@ -22,6 +22,8 @@ import { getStates, getDistricts, getCalendarByDistrict } from "../api/cowin";
 import { Typeahead } from "react-bootstrap-typeahead";
 import BootstrapTable from "react-bootstrap-table-next";
 
+import moment from "moment";
+
 class VaccineSlots extends React.Component {
   constructor(props) {
     super(props);
@@ -62,6 +64,7 @@ class VaccineSlots extends React.Component {
     this.setState(
       {
         stateId,
+        allDistricts : []
       },
       this.getDistricts
     );
@@ -89,7 +92,7 @@ class VaccineSlots extends React.Component {
       let district = this.state.district[0];
       district = district.split("-");
       console.log(district);
-      let date = "03-05-2021";
+      let date = moment().format("DD-MM-YYYY");
 
       getCalendarByDistrict(district[0], date)
         .then((response) => response.json())
@@ -186,11 +189,31 @@ class VaccineSlots extends React.Component {
                 <Card className="mt-4 pt-0">
                   <Card.Body>
                     <Card.Text className="p-2">
-                       <span className="mr-2"> Avaiable slots in the next 7 days </span>
-                      <Badge variant={"success"} className="p-3">18-45 : </Badge>
-                      <Badge variant={"success"} className="ml-4 p-3">45+ : </Badge>
+                      <span className="mr-2">
+                        {" "}
+                        Avaiable slots in the next 7 days{" "}
+                      </span>
+                      <Badge variant={"success"} className="p-3">
+                        18-45 :{" "}
+                      </Badge>
+                      <Badge variant={"success"} className="ml-4 p-3">
+                        45+ :{" "}
+                      </Badge>
                     </Card.Text>
-                    <VaccineCenters centers={this.state.centers} />
+                    {this.state.centers.length ? (
+                      <>
+                        <Button variant="outline-primary" className="mb-4">
+                          Reset
+                        </Button>
+                        <VaccineCenters centers={this.state.centers} />
+                      </>
+                    ) : (
+                      <>
+                        <Alert variant={"warning"}>
+                          No centers found. Select city and district.
+                        </Alert>
+                      </>
+                    )}
                   </Card.Body>
                 </Card>
               </Col>
