@@ -33,12 +33,16 @@ class VaccineSlots extends React.Component {
       allStates: [],
       stateId: [],
       centers: [],
+      allCenters: [],
       available18: 0,
       available45: 0,
     };
 
     this.setDistrict = this.setDistrict.bind(this);
     this.setStates = this.setStates.bind(this);
+    this.getSlots = this.getSlots.bind(this);
+    this.filterCenters = this.filterCenters.bind(this);
+    this.resetSearch = this.resetSearch.bind(this);
   }
   componentDidMount() {
     getStates()
@@ -48,10 +52,8 @@ class VaccineSlots extends React.Component {
         list.states.map(function (state) {
           allStates.push(`${state.state_id}-${state.state_name}`);
         });
-        console.log(allStates);
         this.setState({ allStates });
       });
-    console.log(this.state);
   }
 
   setDistrict(district) {
@@ -89,17 +91,34 @@ class VaccineSlots extends React.Component {
     }
   }
 
+  resetSearch() {
+    // let { allCenters } = this.state;
+  }
+
+  filterCenters(value) {
+    let { allCenters } = this.state;
+    let data = [];
+    allCenters.map(function (center) {
+      let sessions = center.sessions.filter(
+        (session) => session.min_age_limit == value
+      );
+      if (sessions.length) {
+        center.sessions = sessions;
+        data.push(center);
+      }
+    });
+    this.setState({ centers: data });
+  }
+
   getSlots() {
     if (this.state.district.length) {
       let district = this.state.district[0];
       district = district.split("-");
-      console.log(district);
       let date = moment().format("DD-MM-YYYY");
 
       getCalendarByDistrict(district[0], date)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.centers);
           let centers = [];
           let available18 = 0;
           let available45 = 0;
@@ -114,7 +133,8 @@ class VaccineSlots extends React.Component {
               let session18 = center.sessions.filter(
                 (session) => session.min_age_limit == 18
               );
-              console.log(session18);
+              if (session18.length) center.available18 = true;
+
               available18 = session18.reduce(function (acc, curr) {
                 return acc + curr.available_capacity;
               }, available18);
@@ -122,14 +142,20 @@ class VaccineSlots extends React.Component {
               let session45 = center.sessions.filter(
                 (session) => session.min_age_limit == 45
               );
-              console.log(session45);
+              if (session45.length) center.available45 = true;
+
               available45 = session45.reduce(function (acc, curr) {
                 return acc + curr.available_capacity;
               }, available45);
             }
           });
           console.log(`available18 ${available18}, available45 ${available45}`);
-          this.setState({ centers, available18, available45 });
+          this.setState({
+            allCenters: centers,
+            centers,
+            available18,
+            available45,
+          });
         });
     }
   }
@@ -182,70 +208,84 @@ class VaccineSlots extends React.Component {
                 <h1 className="mt-2">CoWIN Vaccination Slot Availability</h1>
                 {/* <p>Find slots for vaccination based on CoWin Availability</p> */}
               </Col>
-              <Col sm="12">
-                <Card className="">
-                  <Card.Body>
-                    <Card.Title>
-                      Search Vaccination slots by District
-                    </Card.Title>
-                    <Card.Text className="p-0">
-                      Choose State
-                      <Form.Group>
-                        <Typeahead
-                          id="basic-typeahead-multiple"
-                          labelKey="state"
-                          onChange={this.setStates}
-                          options={this.state.allStates}
-                        />
-                      </Form.Group>
-                      Choose District
-                      <Form.Group>
-                        <Typeahead
-                          id="basic-typeahead-multiple"
-                          labelKey="district"
-                          onChange={this.setDistrict}
-                          options={this.state.allDistricts}
-                        />
-                      </Form.Group>
-                      <Button variant="outline-primary" className="mb-4">
-                        Reset
-                      </Button>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
+              <Col sm="12" className="mt-4 border p-4 rounded">
+                <Card.Title>Search Vaccination slots by District</Card.Title>
+                <Card.Text className="p-0">
+                  Choose State
+                  <Form.Group>
+                    <Typeahead
+                      id="basic-typeahead-multiple"
+                      labelKey="state"
+                      onChange={this.setStates}
+                      options={this.state.allStates}
+                    />
+                  </Form.Group>
+                  Choose District
+                  <Form.Group>
+                    <Typeahead
+                      id="basic-typeahead-multiple"
+                      labelKey="district"
+                      onChange={this.setDistrict}
+                      options={this.state.allDistricts}
+                    />
+                  </Form.Group>
+                </Card.Text>
               </Col>
-              <Col sm="12">
-                <Card className="mt-4 pt-0">
-                  <Card.Body>
-                    <Card.Text className="p-2">
-                      <span className="mr-2">
-                        {" "}
-                        Available Centers{" "}
-                        <Badge
-                          variant={
-                            this.state.centers.length ? "success" : "danger"
-                          }
-                          className="p-2"
-                        >
-                          {`${this.state.centers.length}`}
-                        </Badge>
-                      </span>
-                      <span className="mr-2"> Avaiable slots </span>
+              <Col sm="12" className="mt-4 border p-4 rounded">
+                <Row>
+                  <Col sm="12" lg="4" className="p-2">
+                    <span className="mr-2">
+                      {" "}
+                      Available Centers{" "}
                       <Badge
-                        variant={this.state.available18 ? "success" : "danger"}
+                        variant={
+                          this.state.centers.length ? "success" : "danger"
+                        }
                         className="p-2"
                       >
-                        18-45 : {`${this.state.available18}`}
+                        {`${this.state.centers.length}`}
                       </Badge>
-                      {/* {!this.state.available18 && (
-                        <Button variant="outline-primary" className="mb-4">
-                          Notify me!
-                        </Button>
-                      )} */}
-                      <Badge variant={"success"} className="ml-4 p-2">
-                        45+ : {`${this.state.available45}`}
-                      </Badge>
-                    </Card.Text>
+                    </span>
+                  </Col>
+                  <Col
+                    sm="12"
+                    lg="4"
+                    className="p-2 justify-content-center d-flex"
+                  >
+                    {/* <span className="mr-2"> Check slots &rarr;</span> */}
+                    <Button
+                      variant={this.state.available18 ? "outline-success" : "outline-danger"}
+                      onClick={() => this.filterCenters(18)}
+                    >
+                      18-45:{" "}
+                      <Card.Subtitle className="p-2 font-weight-bolder">{`${this.state.available18}`}</Card.Subtitle>
+                    </Button>
+                    <Button
+                      className="ml-2"
+                      variant={this.state.available45 ? "outline-success" : "outline-danger"}
+                      onClick={() => this.filterCenters(45)}
+                    >
+                      {">"} 45:{" "}
+                      <Card.Subtitle className="p-2 font-weight-bolder">{`${this.state.available45}`}</Card.Subtitle>
+                    </Button>
+                  </Col>
+                  <Col
+                    sm="12"
+                    lg="4"
+                    className="p-2 justify-content-end d-flex"
+                  >
+                    <Button
+                      variant="outline-primary"
+                      className="ml-4"
+                      onClick={this.getSlots}
+                    >
+                      Reset
+                    </Button>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col sm="12" className="mt-2">
                     {this.state.centers.length ? (
                       <>
                         <VaccineCenters centers={this.state.centers} />
@@ -257,10 +297,10 @@ class VaccineSlots extends React.Component {
                         </Alert>
                       </>
                     )}
-                  </Card.Body>
-                </Card>
+                  </Col>
+                </Row>
               </Col>
-              <Col>
+              <Col sm="12">
                 <p>
                   <a href="https://www.covid19india.org" target="blank">
                     Covid19 cases

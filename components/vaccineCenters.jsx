@@ -13,6 +13,8 @@ import {
   Alert,
 } from "react-bootstrap";
 
+import moment from "moment";
+
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory, {
   textFilter,
@@ -26,30 +28,23 @@ const selectOptions = {
 
 const columns = [
   {
-    dataField: "name",
+    dataField: "pincode",
     text: "Center Name",
     sort: true,
     formatter: nameFormatter,
-    filter: textFilter(),
-  },
-  {
-    dataField: "pincode",
-    text: "Pincode",
-    sort: true,
-    filter: textFilter(),
   },
   {
     dataField: "fee_type",
     text: "Fee Type",
     sort: true,
-    formatter: (cell) => selectOptions[cell],
-    filter: selectFilter({
-      options: selectOptions,
-    }),
+    formatter: feeFormatter,
+    // filter: selectFilter({
+    //   options: selectOptions,
+    // }),
   },
   {
     dataField: "session",
-    text: "Sessions",
+    text: "Slots",
     formatter: sessionsFormatter,
   },
 ];
@@ -58,9 +53,13 @@ function nameFormatter(cell, row) {
   return (
     <>
       <Badge variant="dark">{row.center_id}</Badge>
-      <Badge>{cell}</Badge>
+      <Badge>{row.name}</Badge>
       <br />
       <Badge>{`${row.block_name}, ${row.district_name}, ${row.state_name}`}</Badge>
+      <br />
+      <Badge variant="warning" pill>
+        {row.pincode}
+      </Badge>
     </>
   );
 }
@@ -69,30 +68,83 @@ function sessionsFormatter(cell, row) {
   let sessions = row.sessions.filter(
     (session) => session.available_capacity > 0
   );
+  let session18 = { vaccine: "", date: [], total_slots: 0 };
+  let session45 = { vaccine: "", date: [], total_slots: 0 };
+  {
+    sessions.map((session) => {
+      if (session.min_age_limit == 18) {
+        session18.vaccine = session.vaccine;
+        session18.date.push(moment(session.date, "DD-MM-YYYY").format("Do"));
+        session18.total_slots += session.available_capacity;
+      }
+
+      if (session.min_age_limit == 45) {
+        session45.vaccine = session.vaccine;
+        session45.date.push(moment(session.date, "DD-MM-YYYY").format("Do"));
+        session45.total_slots += session.available_capacity;
+      }
+    });
+  }
   return (
     <>
-      {sessions.map((session) => (
+      {session18.total_slots ? (
         <>
-          <Alert variant="success" className="p-0">
-            <Badge>{session.date}</Badge>
-            <Badge>Age - {session.min_age_limit}</Badge>
-            <Badge variant="">{session.vaccine}</Badge> -{" "}
-            <Badge variant="dark"> {session.available_capacity}</Badge>
-          </Alert>
+          <Card>
+            <Card.Body>
+              <Card.Subtitle>
+                {"Above 45 years"}{" "}
+                <Badge variant="success" className="p-2">
+                  {" "}
+                  {session18.total_slots}
+                </Badge>
+              </Card.Subtitle>
+              <Card.Subtitle className="m-2 text-muted">
+                {session18.vaccine}
+              </Card.Subtitle>
+              <Card.Subtitle className="m-2 text-muted">
+                Dates - {session18.date.toString()}
+              </Card.Subtitle>
+              {/* <Card.Link href="#">View Slots and details</Card.Link> */}
+            </Card.Body>
+          </Card>
         </>
-      ))}
+      ) : (
+        ""
+      )}
+
+      {session45.total_slots ? (
+        <>
+          <Card>
+            <Card.Body>
+              <Card.Subtitle>
+                {"Above 45 years"}{" "}
+                <Badge variant="success" className="p-2">
+                  {" "}
+                  {session45.total_slots}
+                </Badge>
+              </Card.Subtitle>
+              <Card.Subtitle className="m-2 text-muted">
+                {session45.vaccine}
+              </Card.Subtitle>
+              <Card.Subtitle className="m-2 text-muted">
+                Dates - {session45.date.toString()}
+              </Card.Subtitle>
+              {/* <Card.Link href="#">View Slots and details</Card.Link> */}
+            </Card.Body>
+          </Card>
+        </>
+      ) : (
+        ""
+      )}
     </>
   );
 }
-function availableFormatter(cell, row) {
-  let sessions = row.sessions.filter(
-    (session) => session.available_capacity > 0
-  );
+function feeFormatter(cell, row) {
   return (
     <>
-      <Badge pill variant={sessions.length ? "success" : "danger"}>
-        {sessions.length ? "Yes" : "No"}
-      </Badge>
+      <Button block disabled variant={cell == "Free" ? "" : "warning"}>
+        {cell}
+      </Button>
     </>
   );
 }
