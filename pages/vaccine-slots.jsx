@@ -360,6 +360,13 @@ class VaccineSlots extends React.Component {
               <Col sm="12">
                 <hr />
                 <p>
+                  Quick Twitter search links for Covid19 related leads
+              <Button variant="outline-primary" href="/twitter-search" size="sm" className="ml-2">
+                  Search Twitter &rarr;
+                </Button>
+                </p>
+                <hr />
+                <p>
                   <a href="https://www.covid19india.org" target="blank">
                     Covid19 count tracker
                   </a>
