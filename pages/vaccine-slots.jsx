@@ -238,6 +238,9 @@ class VaccineSlots extends React.Component {
               <Col sm="12" className="mb-2">
                 <h1 className="mt-2">CoWIN Vaccination Slot Availability</h1>
                 {/* <p>Find slots for vaccination based on CoWin Availability</p> */}
+                <Alert variant="secondary" className="text-center">
+                  Work in progress - Get notified when stocks are available
+                </Alert>
               </Col>
               <Col sm="12" className="mt-4 border p-4 rounded bg-white">
                 <Card.Title>Search Vaccination slots by District</Card.Title>
