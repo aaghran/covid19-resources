@@ -183,7 +183,10 @@ class VaccineSlots extends React.Component {
         <Head>
           <title>CoWIN Vaccination Slot Availability</title>
           <meta name="title" content="CoWIN Vaccination Slot Availability" />
-          <meta name="description" content="" />
+          <meta
+            name="description"
+            content="While the process of registering for COVID vaccine is simple, getting a slot is extremely difficult in India. Search available slots for a district or by pincode"
+          />
 
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://covid19.aaghran.com/" />
@@ -191,7 +194,10 @@ class VaccineSlots extends React.Component {
             property="og:title"
             content="CoWIN Vaccination Slot Availability"
           />
-          <meta property="og:description" content="" />
+          <meta
+            property="og:description"
+            content="While the process of registering for COVID vaccine is simple, getting a slot is extremely difficult in India. Search available slots quickly for a district or by pincode"
+          />
           <meta
             property="og:image"
             content="https://wanderingbong-v2.s3.ap-south-1.amazonaws.com/bg-covid.webp"
@@ -203,7 +209,10 @@ class VaccineSlots extends React.Component {
             property="twitter:title"
             content="CoWIN Vaccination Slot Availability"
           />
-          <meta property="twitter:description" content="" />
+          <meta
+            property="twitter:description"
+            content="While the process of registering for COVID vaccine is simple, getting a slot is extremely difficult in India. Search available slots quickly for a district or by pincode"
+          />
           <meta
             property="twitter:image"
             content="https://wanderingbong-v2.s3.ap-south-1.amazonaws.com/bg-covid.webp"
@@ -251,10 +260,12 @@ class VaccineSlots extends React.Component {
                   </Form.Group>
                 </Card.Body>
               </Col>
-              <ShareIcons className="m-2"
-                  shareUrl={"https://covid19.aaghran.com/vaccine-slots"}
-                />
-                
+              <ShareIcons
+                className="m-2"
+                title="Search available slots for a district or by pincode #vaccination #tracker #CovidVaccineIndia"
+                shareUrl={"https://covid19.aaghran.com/vaccine-slots"}
+              />
+
               <Col sm="12" className="border p-4 rounded bg-white">
                 <Row>
                   <Col
@@ -347,7 +358,7 @@ class VaccineSlots extends React.Component {
                 <hr />
                 <p>
                   <a href="https://www.covid19india.org" target="blank">
-                    Covid19 cases
+                    Covid19 count tracker
                   </a>
                   <br />A volunteer-driven crowdsourced effort to track the
                   coronavirus in India.
@@ -356,7 +367,7 @@ class VaccineSlots extends React.Component {
                 <p>
                   This web app uses CoWin open API to make it easy for you to
                   find slots. Availability changes in real time. <br />
-                  So book your slot ASAP using
+                  So book your slot ASAP using{" "}
                   <a
                     href="https://selfregistration.cowin.gov.in"
                     target="blank"
