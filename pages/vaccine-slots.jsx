@@ -23,6 +23,7 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import BootstrapTable from "react-bootstrap-table-next";
 
 import moment from "moment";
+import ShareIcons from "../components/share_icons";
 
 class VaccineSlots extends React.Component {
   constructor(props) {
@@ -36,12 +37,14 @@ class VaccineSlots extends React.Component {
       allCenters: [],
       available18: 0,
       available45: 0,
+      filterAge: 0,
     };
 
     this.setDistrict = this.setDistrict.bind(this);
     this.setStates = this.setStates.bind(this);
     this.getSlots = this.getSlots.bind(this);
     this.filterCenters = this.filterCenters.bind(this);
+    this.filterByPincode = this.filterByPincode.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
   }
   componentDidMount() {
@@ -94,9 +97,24 @@ class VaccineSlots extends React.Component {
   resetSearch() {
     // let { allCenters } = this.state;
   }
+  filterByPincode(pincode) {
+    let { filterAge, allCenters } = this.state;
+    this.setState({ centers: allCenters });
+    this.filterCenters(filterAge);
+    let { centers } = this.state;
+    let data = centers;
+    if (pincode)
+      data = centers.filter((center) => {
+        return center.pincode.toString().includes(pincode);
+      });
+    this.setState({ centers: data });
+  }
 
   filterCenters(value) {
     let { allCenters } = this.state;
+    if (value == 0) {
+      this.setState({ centers: allCenters, filterAge: value });
+    }
     let data = [];
     allCenters.map(function (center) {
       let sessions = center.sessions.filter(
@@ -107,7 +125,7 @@ class VaccineSlots extends React.Component {
         data.push(center);
       }
     });
-    this.setState({ centers: data });
+    this.setState({ centers: data, filterAge: value });
   }
 
   getSlots() {
@@ -199,8 +217,12 @@ class VaccineSlots extends React.Component {
         })(window,document,'script','dataLayer','GTM-KFXF3TG');`,
             }}
           ></script>
+          <script
+            src="https://kit.fontawesome.com/dddd44537f.js"
+            crossorigin="anonymous"
+          ></script>
         </Head>
-        <NavBar />
+        {/* <NavBar /> */}
         <Container>
           <Container fluid>
             <Row className="justify-content-md-between">
@@ -208,9 +230,9 @@ class VaccineSlots extends React.Component {
                 <h1 className="mt-2">CoWIN Vaccination Slot Availability</h1>
                 {/* <p>Find slots for vaccination based on CoWin Availability</p> */}
               </Col>
-              <Col sm="12" className="mt-4 border p-4 rounded">
+              <Col sm="12" className="mt-4 border p-4 rounded bg-white">
                 <Card.Title>Search Vaccination slots by District</Card.Title>
-                <Card.Text className="p-0">
+                <Card.Body className="p-0">
                   Choose State
                   <Form.Group>
                     <Typeahead
@@ -219,9 +241,7 @@ class VaccineSlots extends React.Component {
                       onChange={this.setStates}
                       options={this.state.allStates}
                     />
-                  </Form.Group>
-                  Choose District
-                  <Form.Group>
+                    Choose District
                     <Typeahead
                       id="basic-typeahead-multiple"
                       labelKey="district"
@@ -229,11 +249,19 @@ class VaccineSlots extends React.Component {
                       options={this.state.allDistricts}
                     />
                   </Form.Group>
-                </Card.Text>
+                </Card.Body>
               </Col>
-              <Col sm="12" className="mt-4 border p-4 rounded">
+              <ShareIcons className="m-2"
+                  shareUrl={"https://covid19.aaghran.com/vaccine-slots"}
+                />
+                
+              <Col sm="12" className="border p-4 rounded bg-white">
                 <Row>
-                  <Col sm="12" lg="4" className="p-2">
+                  <Col
+                    sm="12"
+                    lg="4"
+                    className="p-2 justify-content-left d-flex"
+                  >
                     <span className="mr-2">
                       {" "}
                       Available Centers{" "}
@@ -248,42 +276,57 @@ class VaccineSlots extends React.Component {
                     </span>
                   </Col>
                   <Col
-                    sm="12"
+                    sm="8"
                     lg="4"
-                    className="p-2 justify-content-center d-flex"
+                    className="p-2 justify-content-left d-flex"
                   >
-                    {/* <span className="mr-2"> Check slots &rarr;</span> */}
+                    <span className="mr-2"> Filter &rarr;</span>
                     <Button
-                      variant={this.state.available18 ? "outline-success" : "outline-danger"}
+                      variant={
+                        this.state.available18
+                          ? "outline-success"
+                          : "outline-danger"
+                      }
                       onClick={() => this.filterCenters(18)}
                     >
                       18-45:{" "}
-                      <Card.Subtitle className="p-2 font-weight-bolder">{`${this.state.available18}`}</Card.Subtitle>
+                      <span className="p-2 font-weight-bolder">{`${this.state.available18}`}</span>
                     </Button>
                     <Button
                       className="ml-2"
-                      variant={this.state.available45 ? "outline-success" : "outline-danger"}
+                      variant={
+                        this.state.available45
+                          ? "outline-success"
+                          : "outline-danger"
+                      }
                       onClick={() => this.filterCenters(45)}
                     >
                       {">"} 45:{" "}
-                      <Card.Subtitle className="p-2 font-weight-bolder">{`${this.state.available45}`}</Card.Subtitle>
+                      <span className="p-2 font-weight-bolder">{`${this.state.available45}`}</span>
                     </Button>
                   </Col>
-                  <Col
-                    sm="12"
-                    lg="4"
-                    className="p-2 justify-content-end d-flex"
-                  >
+                  <Col sm="4" lg="4" className="p-2 justify-content-end d-flex">
+                    <InputGroup className="">
+                      {/* <InputGroup.Prepend>
+                        <InputGroup.Text>H</InputGroup.Text>
+                      </InputGroup.Prepend> */}
+                      <FormControl
+                        id="inputPincode"
+                        type="number"
+                        placeholder="Pincode"
+                        onChange={(e) => this.filterByPincode(e.target.value)}
+                      />
+                      <InputGroup.Append></InputGroup.Append>
+                    </InputGroup>
                     <Button
                       variant="outline-primary"
-                      className="ml-4"
+                      className="ml-2"
                       onClick={this.getSlots}
                     >
                       Reset
                     </Button>
                   </Col>
                 </Row>
-
                 <Row>
                   <Col sm="12" className="mt-2">
                     {this.state.centers.length ? (
@@ -301,12 +344,25 @@ class VaccineSlots extends React.Component {
                 </Row>
               </Col>
               <Col sm="12">
+                <hr />
                 <p>
                   <a href="https://www.covid19india.org" target="blank">
                     Covid19 cases
                   </a>
                   <br />A volunteer-driven crowdsourced effort to track the
                   coronavirus in India.
+                </p>
+                <hr />
+                <p>
+                  This web app uses CoWin open API to make it easy for you to
+                  find slots. Availability changes in real time. <br />
+                  So book your slot ASAP using
+                  <a
+                    href="https://selfregistration.cowin.gov.in"
+                    target="blank"
+                  >
+                    https://selfregistration.cowin.gov.in.
+                  </a>
                 </p>
               </Col>
             </Row>

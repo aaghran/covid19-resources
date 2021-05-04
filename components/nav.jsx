@@ -17,7 +17,7 @@ const Menu = (props) => {
 
   return (
     <div>
-      <Navbar color="dark" expand="md" className="" fixed>
+      <Navbar color="dark" expand="md" className="" >
         <Container>
           <NavbarBrand className="text-white" href="/twitter-search">Covid19-Resources</NavbarBrand>
           <NavbarToggler onClick={toggle} className="text-white" />
