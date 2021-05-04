@@ -52,12 +52,6 @@ const columns = [
     text: "Sessions",
     formatter: sessionsFormatter,
   },
-  {
-    dataField: "available",
-    text: "available",
-    formatter: availableFormatter,
-    sort: true,
-  },
 ];
 
 function nameFormatter(cell, row) {
@@ -73,7 +67,7 @@ function nameFormatter(cell, row) {
 
 function sessionsFormatter(cell, row) {
   let sessions = row.sessions.filter(
-    (session) => session.available_capacity > 6
+    (session) => session.available_capacity > 0
   );
   return (
     <>

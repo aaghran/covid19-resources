@@ -33,6 +33,8 @@ class VaccineSlots extends React.Component {
       allStates: [],
       stateId: [],
       centers: [],
+      available18: 0,
+      available45: 0,
     };
 
     this.setDistrict = this.setDistrict.bind(this);
@@ -64,7 +66,7 @@ class VaccineSlots extends React.Component {
     this.setState(
       {
         stateId,
-        allDistricts : []
+        allDistricts: [],
       },
       this.getDistricts
     );
@@ -98,14 +100,36 @@ class VaccineSlots extends React.Component {
         .then((response) => response.json())
         .then((data) => {
           console.log(data.centers);
-          let centers = data.centers.filter(
-            (center) =>
+          let centers = [];
+          let available18 = 0;
+          let available45 = 0;
+          data.centers.map(function (center) {
+            if (
               center.sessions.length > 0 &&
               center.sessions.filter(
                 (session) => session.available_capacity > 0
-              )
-          );
-          this.setState({ centers });
+              ).length
+            ) {
+              centers.push(center);
+              let session18 = center.sessions.filter(
+                (session) => session.min_age_limit == 18
+              );
+              console.log(session18);
+              available18 = session18.reduce(function (acc, curr) {
+                return acc + curr.available_capacity;
+              }, available18);
+
+              let session45 = center.sessions.filter(
+                (session) => session.min_age_limit == 45
+              );
+              console.log(session45);
+              available45 = session45.reduce(function (acc, curr) {
+                return acc + curr.available_capacity;
+              }, available45);
+            }
+          });
+          console.log(`available18 ${available18}, available45 ${available45}`);
+          this.setState({ centers, available18, available45 });
         });
     }
   }
@@ -161,8 +185,10 @@ class VaccineSlots extends React.Component {
               <Col sm="12">
                 <Card className="">
                   <Card.Body>
-                    <Card.Title>Search resources by City</Card.Title>
-                    <Card.Text className="p-2">
+                    <Card.Title>
+                      Search Vaccination slots by District
+                    </Card.Title>
+                    <Card.Text className="p-0">
                       Choose State
                       <Form.Group>
                         <Typeahead
@@ -181,6 +207,9 @@ class VaccineSlots extends React.Component {
                           options={this.state.allDistricts}
                         />
                       </Form.Group>
+                      <Button variant="outline-primary" className="mb-4">
+                        Reset
+                      </Button>
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -191,20 +220,34 @@ class VaccineSlots extends React.Component {
                     <Card.Text className="p-2">
                       <span className="mr-2">
                         {" "}
-                        Avaiable slots in the next 7 days{" "}
+                        Available Centers{" "}
+                        <Badge
+                          variant={
+                            this.state.centers.length ? "success" : "danger"
+                          }
+                          className="p-2"
+                        >
+                          {`${this.state.centers.length}`}
+                        </Badge>
                       </span>
-                      <Badge variant={"success"} className="p-3">
-                        18-45 :{" "}
+                      <span className="mr-2"> Avaiable slots </span>
+                      <Badge
+                        variant={this.state.available18 ? "success" : "danger"}
+                        className="p-2"
+                      >
+                        18-45 : {`${this.state.available18}`}
                       </Badge>
-                      <Badge variant={"success"} className="ml-4 p-3">
-                        45+ :{" "}
+                      {/* {!this.state.available18 && (
+                        <Button variant="outline-primary" className="mb-4">
+                          Notify me!
+                        </Button>
+                      )} */}
+                      <Badge variant={"success"} className="ml-4 p-2">
+                        45+ : {`${this.state.available45}`}
                       </Badge>
                     </Card.Text>
                     {this.state.centers.length ? (
                       <>
-                        <Button variant="outline-primary" className="mb-4">
-                          Reset
-                        </Button>
                         <VaccineCenters centers={this.state.centers} />
                       </>
                     ) : (
