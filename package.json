@@ -13,9 +13,11 @@
   "dependencies": {
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
+    "aws-sdk": "^2.900.0",
     "bootstrap": "^4.4.1",
     "brotli-webpack-plugin": "^1.1.0",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "dotenv": "^8.5.0",
     "html-webpack-plugin": "^5.3.1",
     "isomorphic-fetch": "^3.0.0",
     "moment": "^2.29.1",
