@@ -198,7 +198,7 @@ This is a simple tool to find resources and leads in Twitter based on your city 
             }}
           ></script>
         </Head>
-        <NavBar />
+        {/* <NavBar /> */}
         <Container className="" fluild>
           <Row className="justify-content-md-between mt-2 mb-2">
             <Col sm="12">
@@ -212,6 +212,14 @@ This is a simple tool to find resources and leads in Twitter based on your city 
                 This is a simple tool to find resources and leads in Twitter
                 based on your city or need.
               </p>
+              <hr />
+                <p>
+                  Get vaccinated!
+                  Help the country to overcome this surge<br />
+              <Button variant="primary" href="/vaccine-slots" size="sm" className="">
+                  Check Vaccination Availability &rarr;
+                </Button>
+                </p>
               <hr></hr>
               <p>
                 <Alert variant="warning">
