@@ -38,6 +38,7 @@ class VaccineSlots extends React.Component {
       available18: 0,
       available45: 0,
       filterAge: 0,
+      showSearch: true,
     };
 
     this.setDistrict = this.setDistrict.bind(this);
@@ -46,6 +47,7 @@ class VaccineSlots extends React.Component {
     this.filterCenters = this.filterCenters.bind(this);
     this.filterByPincode = this.filterByPincode.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
+    this.toggleSearch = this.toggleSearch.bind(this);
   }
   componentDidMount() {
     getStates()
@@ -57,6 +59,14 @@ class VaccineSlots extends React.Component {
         });
         this.setState({ allStates });
       });
+  }
+
+  toggleSearch() {
+      
+    this.setState({
+        showSearch: !this.state.showSearch,
+    });
+    console.log(this.state)
   }
 
   setDistrict(district) {
@@ -72,6 +82,7 @@ class VaccineSlots extends React.Component {
       {
         stateId,
         allDistricts: [],
+        district: [],
       },
       this.getDistricts
     );
@@ -173,6 +184,7 @@ class VaccineSlots extends React.Component {
             centers,
             available18,
             available45,
+            showSearch: !this.state.showSearch,
           });
         });
     }
@@ -235,33 +247,47 @@ class VaccineSlots extends React.Component {
         <Container>
           <Container fluid>
             <Row className="justify-content-md-between">
-              <Col sm="12" className="mb-2">
-                <h1 className="mt-2">CoWIN Vaccination Slot Availability</h1>
-                {/* <p>Find slots for vaccination based on CoWin Availability</p> */}
+              <Col sm="12" className="">
+                <h1 className="">CoWIN Vaccination Slot Availability</h1>
                 <Alert variant="secondary" className="text-center">
-                  Work in progress - Get notified when stocks are available
+                  Soon to be added <br />Get notified when stocks are available
                 </Alert>
               </Col>
-              <Col sm="12" className="mt-4 border p-4 rounded bg-white">
-                <Card.Title>Search Vaccination slots by District</Card.Title>
-                <Card.Body className="p-0">
-                  Choose State
-                  <Form.Group>
-                    <Typeahead
-                      id="basic-typeahead-multiple"
-                      labelKey="state"
-                      onChange={this.setStates}
-                      options={this.state.allStates}
-                    />
-                    Choose District
-                    <Typeahead
-                      id="basic-typeahead-multiple"
-                      labelKey="district"
-                      onChange={this.setDistrict}
-                      options={this.state.allDistricts}
-                    />
-                  </Form.Group>
-                </Card.Body>
+              <Col sm="12" className="border p-4 rounded bg-white">
+                {this.state.showSearch ? (
+                  <>
+                    <Card.Title>
+                      Search Vaccination slots by District
+                    </Card.Title>
+                    <Card.Body className="p-0">
+                      Choose State
+                      <Form.Group>
+                        <Typeahead
+                          id="basic-typeahead-multiple"
+                          labelKey="state"
+                          onChange={this.setStates}
+                          options={this.state.allStates}
+                        />
+                        Choose District
+                        <Typeahead
+                          id="basic-typeahead-multiple"
+                          labelKey="district"
+                          onChange={this.setDistrict}
+                          value={this.state.district}
+                          options={this.state.allDistricts}
+                        />
+                      </Form.Group>
+                    </Card.Body>
+                  </>
+                ) : (
+                  <Button
+                    block
+                    variant={"outline-success"}
+                    onClick={this.toggleSearch}
+                  >
+                    New Search
+                  </Button>
+                )}
               </Col>
               <ShareIcons
                 className="m-2"

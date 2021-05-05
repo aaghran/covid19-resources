@@ -121,7 +121,8 @@ class VaccineSlots extends React.Component {
                       </Badge>
                     </div>
                     <div class="media-body text-right">
-                      <h3>{session18.total_slots}</h3> {"Available Slots"}
+                      <h3>{Math.ceil(session18.total_slots)}</h3>{" "}
+                      {"Available Slots"}
                       <p className="mt-2">
                         <i class="far fa-calendar-check"></i>
                         {session18.date.map((date) => (
@@ -165,7 +166,8 @@ class VaccineSlots extends React.Component {
                       </Badge>
                     </div>
                     <div class="media-body text-right">
-                      <h3>{session45.total_slots}</h3> {"Available Slots"}
+                      <h3>{Math.ceil(session45.total_slots)}</h3>{" "}
+                      {"Available Slots"}
                       <p className="mt-2">
                         <i class="far fa-calendar-check"></i>
                         {session45.date.map((date) => (
