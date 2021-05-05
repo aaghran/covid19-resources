@@ -14,6 +14,7 @@ import {
 } from "react-bootstrap";
 
 import moment from "moment";
+import SessionDetail from "./sessionDetail";
 
 function SessionsFormatter(row) {
   return (
@@ -176,6 +177,7 @@ class VaccineSlots extends React.Component {
                           </Badge>
                         ))}
                       </p>
+                      <SessionDetail row={row} />
                     </div>
                   </div>
                 </div>
