@@ -84,7 +84,7 @@ function getByDistrict(district, emailList) {
         <p><a href="https://selfregistration.cowin.gov.in/" target="_blank" rel="noopener" style="color: #0000EE;">Register and get vaccinated at Cowin</a></p>
         </div>`;
         console.log(body18);
-        sendEmail(["aaghran@gmail.com"], body18, subject);
+        sendEmail(emailList, body18, subject);
       }
 
       if (available45) {
@@ -111,7 +111,7 @@ function getByDistrict(district, emailList) {
         <p><a href="https://selfregistration.cowin.gov.in/" target="_blank" rel="noopener" style="color: #0000EE;">Register and get vaccinated at Cowin</a></p>
         </div>`;
         console.log(body45);
-        sendEmail(["aaghran@gmail.com"], body45, subject);
+        sendEmail(emailList, body45, subject);
       }
     })
     .catch((err) => console.error(err));
@@ -119,10 +119,11 @@ function getByDistrict(district, emailList) {
 
 var cron = require("node-cron");
 console.log("task runner is ready");
-cron.schedule("1 8-18/1 * * *", () => {
+cron.schedule("5 6-18/4 * * *", () => {
   console.log("run task");
-  getByDistrict(294, ["aaghran@gmail.com","aaghran.tech@gmail.com","wanderingbong91@gmail.com"]);
-  getByDistrict(730, ["aaghran@gmail.com","aaghran.tech@gmail.com","wanderingbong91@gmail.com"]);
+  getByDistrict(294, ["aaghran@gmail.com","kartikeya.nitd@gmail.com","meghabepari@gmail.com"]);
+  getByDistrict(730, ["aaghran@gmail.com","kartikeya.nitd@gmail.com"]);
+  getByDistrict(737, ["aaghran@gmail.com", "agarwalankit3807@gmail.com"]);
 });
 
 // Call cowin for pincode
