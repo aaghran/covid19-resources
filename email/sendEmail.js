@@ -15,7 +15,7 @@ exports.sendEmail = function (toAddresses, body, subject) {
   var params = {
     Source: "aaghran@gmail.com",
     Destination: {
-      ToAddresses: toAddresses,
+      BccAddresses: toAddresses,
     },
     ReplyToAddresses: ["aaghran@gmail.com"],
     Message: {
