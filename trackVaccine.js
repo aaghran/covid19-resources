@@ -119,11 +119,19 @@ function getByDistrict(district, emailList) {
 
 var cron = require("node-cron");
 console.log("task runner is ready");
-cron.schedule("5 6-18/4 * * *", () => {
-  console.log("run task");
-  getByDistrict(294, ["aaghran@gmail.com","kartikeya.nitd@gmail.com","meghabepari@gmail.com"]);
-  getByDistrict(730, ["aaghran@gmail.com","kartikeya.nitd@gmail.com"]);
-  getByDistrict(737, ["aaghran@gmail.com", "agarwalankit3807@gmail.com"]);
-});
+cron.schedule(
+  "1 6-18/3 * * *",
+  () => {
+    console.log("run task");
+    getByDistrict(294, [
+      "aaghran@gmail.com",
+      "kartikeya.nitd@gmail.com",
+      "meghabepari@gmail.com",
+    ]);
+    getByDistrict(730, ["aaghran@gmail.com", "kartikeya.nitd@gmail.com"]);
+    getByDistrict(737, ["aaghran@gmail.com", "agarwalankit3807@gmail.com"]);
+  },
+  { timezone: "Asia/Kolkata" }
+);
 
 // Call cowin for pincode
