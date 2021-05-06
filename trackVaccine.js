@@ -121,8 +121,8 @@ var cron = require("node-cron");
 console.log("task runner is ready");
 cron.schedule("* 8-18/1 * * *", () => {
   console.log("run task");
-  getByDistrict(294, ["aaghran@gmail.com"]);
-  getByDistrict(730, ["aaghran@gmail.com"]);
+  getByDistrict(294, ["aaghran@gmail.com","aaghran.tech@gmail.com","wanderingbong91@gmail.com"]);
+  getByDistrict(730, ["aaghran@gmail.com","aaghran.tech@gmail.com","wanderingbong91@gmail.com"]);
 });
 
 // Call cowin for pincode
