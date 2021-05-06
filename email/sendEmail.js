@@ -32,12 +32,16 @@ exports.sendEmail = function (toAddresses, body, subject) {
     },
   };
 
-  console.log(params);
+  console.info("send email ", subject);
+  console.info("send email to", toAddresses.toString());
 
   new AWS.SES(SESConfig)
     .sendEmail(params)
     .promise()
     .then((res) => {
-      console.log(res);
+      // console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
