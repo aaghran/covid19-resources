@@ -84,7 +84,7 @@ function getByDistrict(district, emailList) {
         <p><a href="https://selfregistration.cowin.gov.in/" target="_blank" rel="noopener" style="color: #0000EE;">Register and get vaccinated at Cowin</a></p>
         </div>`;
         console.log(body18);
-        sendEmail(emailList, body18, subject);
+        sendEmail(["aaghran@gmail.com"], body18, subject);
       }
 
       if (available45) {
@@ -111,7 +111,7 @@ function getByDistrict(district, emailList) {
         <p><a href="https://selfregistration.cowin.gov.in/" target="_blank" rel="noopener" style="color: #0000EE;">Register and get vaccinated at Cowin</a></p>
         </div>`;
         console.log(body45);
-        sendEmail(emailList, body45, subject);
+        sendEmail(["aaghran@gmail.com"], body45, subject);
       }
     })
     .catch((err) => console.error(err));
@@ -120,7 +120,7 @@ function getByDistrict(district, emailList) {
 var cron = require("node-cron");
 console.log("task runner is ready");
 cron.schedule(
-  "1 6-18/3 * * *",
+  "1 6-18/1 * * *",
   () => {
     console.log("run task");
     getByDistrict(294, [
