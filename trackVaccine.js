@@ -118,7 +118,9 @@ function getByDistrict(district, emailList) {
 }
 
 var cron = require("node-cron");
-cron.schedule("* 8-18/2 * * *", () => {
+console.log("task runner is ready");
+cron.schedule("* 8-18/1 * * *", () => {
+  console.log("run task");
   getByDistrict(294, ["aaghran@gmail.com"]);
   getByDistrict(730, ["aaghran@gmail.com"]);
 });
