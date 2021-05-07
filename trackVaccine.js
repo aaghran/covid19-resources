@@ -60,7 +60,7 @@ cron.schedule(
   () => {
     console.log("run task");
     getByDistrict(294, ["aaghran@gmail.com", "meghabepari@gmail.com"], [18]);
-    getByPinCode(560043, ["aaghran@gmail.com", "meghabepari@gmail.com"], [18]);
+    getByPinCode(560043, ["aaghran@gmail.com", "meghabepari@gmail.com","aniruddha.nitd@gmail.com"], [18]);
     getByPinCode(
       442402,
       ["aaghran@gmail.com", "meghabepari@gmail.com"],
