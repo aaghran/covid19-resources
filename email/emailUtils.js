@@ -93,21 +93,21 @@ exports.emailPinCode = function (pincode, data, emailList, sendFor) {
   } else {
     console.log(`No available slots in pincode ${pincode}`);
   }
-  if (available18 && sendFor.includes(18)) {
+  if (available18) {
     let { subject, body } = emailBodyPincode(
       pincode,
       centers,
       "18 - 45 years",
       available18
     );
-    sendEmail(emailList, body, subject);
+    if (sendFor.includes(18)) sendEmail(emailList, body, subject);
   } else {
     let { subject, body } = emailBodyPincodeNoSlots(
       pincode,
       centers,
       "18 - 45 years"
     );
-    sendEmail(["aaghran@gmail.com"], body, subject);
+    if (sendFor.includes(18)) sendEmail(["aaghran@gmail.com"], body, subject);
   }
 
   if (available45 && sendFor.includes(45)) {
@@ -117,14 +117,14 @@ exports.emailPinCode = function (pincode, data, emailList, sendFor) {
       "> 45 years",
       available45
     );
-    sendEmail(emailList, body, subject);
+    if (sendFor.includes(45)) sendEmail(emailList, body, subject);
   } else {
     let { subject, body } = emailBodyPincodeNoSlots(
       pincode,
       centers,
       "> 45 years"
     );
-    sendEmail(["aaghran@gmail.com"], body, subject);
+    if (sendFor.includes(45)) sendEmail(["aaghran@gmail.com"], body, subject);
   }
   return;
 };

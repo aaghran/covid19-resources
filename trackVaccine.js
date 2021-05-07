@@ -66,7 +66,6 @@ cron.schedule(
       ["aaghran@gmail.com", "meghabepari@gmail.com"],
       [18, 45]
     );
-    getByDistrict(294, ["aaghran@gmail.com", "meghabepari@gmail.com"], [18]);
     getByDistrict(730, ["aaghran@gmail.com", "kartikeya.nitd@gmail.com"], [18]);
     getByDistrict(
       737,
