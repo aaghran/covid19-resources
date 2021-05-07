@@ -14,9 +14,7 @@ import {
   Badge,
 } from "react-bootstrap";
 
-import NavBar from "../components/nav";
 import VaccineCenters from "../components/vaccineCenters";
-import Image from "next/image";
 import { getStates, getDistricts, getCalendarByDistrict } from "../api/cowin";
 
 import { Typeahead } from "react-bootstrap-typeahead";
@@ -62,11 +60,10 @@ class VaccineSlots extends React.Component {
   }
 
   toggleSearch() {
-      
     this.setState({
-        showSearch: !this.state.showSearch,
+      showSearch: !this.state.showSearch,
     });
-    console.log(this.state)
+    console.log(this.state);
   }
 
   setDistrict(district) {
@@ -239,6 +236,11 @@ class VaccineSlots extends React.Component {
             }}
           ></script>
           <script
+            data-ad-client="ca-pub-9678197142380634"
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          ></script>
+          <script
             src="https://kit.fontawesome.com/dddd44537f.js"
             crossorigin="anonymous"
           ></script>
@@ -250,7 +252,8 @@ class VaccineSlots extends React.Component {
               <Col sm="12" className="">
                 <h1 className="">CoWIN Vaccination Slot Availability</h1>
                 <Alert variant="secondary" className="text-center">
-                  Soon to be added <br />Get notified when stocks are available
+                  Soon to be added <br />
+                  Get notified when stocks are available
                 </Alert>
               </Col>
               <Col sm="12" className="border p-4 rounded bg-white">
@@ -387,9 +390,14 @@ class VaccineSlots extends React.Component {
                 <hr />
                 <p>
                   Quick Twitter search links for Covid19 related leads
-              <Button variant="outline-primary" href="/twitter-search" size="sm" className="ml-2">
-                  Search Twitter &rarr;
-                </Button>
+                  <Button
+                    variant="outline-primary"
+                    href="/twitter-search"
+                    size="sm"
+                    className="ml-2"
+                  >
+                    Search Twitter &rarr;
+                  </Button>
                 </p>
                 <hr />
                 <p>
@@ -417,7 +425,8 @@ class VaccineSlots extends React.Component {
         </Container>
 
         <footer className="cntr-footer">
-          © <a href="https://aaghran.com/">Aaghran Ghosh</a> - 2021
+          <b>Note - Ad revenue will be contributed to NGOs operating for covid19 relief.</b>
+          <br />© <a href="https://aaghran.com/">Aaghran Ghosh</a> - 2021
         </footer>
       </Fragment>
     );
