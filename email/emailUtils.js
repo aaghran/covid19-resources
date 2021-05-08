@@ -66,7 +66,8 @@ exports.emailforDistrict = function (district, data, emailList, sendFor) {
       centers,
       "18 - 45 years"
     );
-    sendEmail(["aaghran@gmail.com"], body, subject);
+    // sendEmail(["aaghran@gmail.com"], body, subject);
+    console.log(subject);
   }
 
   if (available45 && sendFor.includes(45)) {
@@ -79,7 +80,8 @@ exports.emailforDistrict = function (district, data, emailList, sendFor) {
     sendEmail(emailList, body, subject);
   } else {
     let { subject, body } = emailBodyNoSlots(district, centers, "> 45 years");
-    sendEmail(["aaghran@gmail.com"], body, subject);
+    console.log(subject);
+    // sendEmail(["aaghran@gmail.com"], body, subject);
   }
   return;
 };
@@ -107,7 +109,8 @@ exports.emailPinCode = function (pincode, data, emailList, sendFor) {
       centers,
       "18 - 45 years"
     );
-    if (sendFor.includes(18)) sendEmail(["aaghran@gmail.com"], body, subject);
+    // if (sendFor.includes(18)) sendEmail(["aaghran@gmail.com"], body, subject);
+    console.log(subject);
   }
 
   if (available45 && sendFor.includes(45)) {
@@ -124,7 +127,8 @@ exports.emailPinCode = function (pincode, data, emailList, sendFor) {
       centers,
       "> 45 years"
     );
-    if (sendFor.includes(45)) sendEmail(["aaghran@gmail.com"], body, subject);
+    // if (sendFor.includes(45)) sendEmail(["aaghran@gmail.com"], body, subject);
+    console.log(subject);
   }
   return;
 };

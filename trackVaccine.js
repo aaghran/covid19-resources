@@ -121,4 +121,4 @@ cron.schedule(
   { timezone: "Asia/Kolkata" }
 );
 
-getConfig();
+// getConfig();
