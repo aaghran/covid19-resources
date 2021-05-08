@@ -37,6 +37,7 @@ class VaccineSlots extends React.Component {
       available45: 0,
       filterAge: 0,
       showSearch: true,
+      formLink: "",
     };
 
     this.setDistrict = this.setDistrict.bind(this);
@@ -67,10 +68,16 @@ class VaccineSlots extends React.Component {
   }
 
   setDistrict(district) {
+    let param = district[0];
+    param = param.split("-");
+
+    let formLink = `https://docs.google.com/forms/d/e/1FAIpQLSdF2zjPVg3DJP3Q2niy17JD41wFtZqbUuirCJh7Wr33avh85A/viewform?usp=pp_url&entry.1667511934=District&entry.1484605708=${param[0]}`;
     this.setState(
       {
         district,
+        formLink,
       },
+
       this.getSlots
     );
   }
@@ -257,40 +264,28 @@ class VaccineSlots extends React.Component {
                 </Alert>
               </Col>
               <Col sm="12" className="border p-4 rounded bg-white">
-                {this.state.showSearch ? (
-                  <>
-                    <Card.Title>
-                      Search Vaccination slots by District
-                    </Card.Title>
-                    <Card.Body className="p-0">
-                      Choose State
-                      <Form.Group>
-                        <Typeahead
-                          id="basic-typeahead-multiple"
-                          labelKey="state"
-                          onChange={this.setStates}
-                          options={this.state.allStates}
-                        />
-                        Choose District
-                        <Typeahead
-                          id="basic-typeahead-multiple"
-                          labelKey="district"
-                          onChange={this.setDistrict}
-                          value={this.state.district}
-                          options={this.state.allDistricts}
-                        />
-                      </Form.Group>
-                    </Card.Body>
-                  </>
-                ) : (
-                  <Button
-                    block
-                    variant={"outline-success"}
-                    onClick={this.toggleSearch}
-                  >
-                    New Search
-                  </Button>
-                )}
+                <>
+                  <Card.Title>Search Vaccination slots by District</Card.Title>
+                  <Card.Body className="p-0">
+                    Choose State
+                    <Form.Group>
+                      <Typeahead
+                        id="basic-typeahead-multiple"
+                        labelKey="state"
+                        onChange={this.setStates}
+                        options={this.state.allStates}
+                      />
+                      Choose District
+                      <Typeahead
+                        id="basic-typeahead-multiple"
+                        labelKey="district"
+                        onChange={this.setDistrict}
+                        value={this.state.district}
+                        options={this.state.allDistricts}
+                      />
+                    </Form.Group>
+                  </Card.Body>
+                </>
               </Col>
               <ShareIcons
                 className="m-2"
@@ -378,8 +373,22 @@ class VaccineSlots extends React.Component {
                       </>
                     ) : (
                       <>
+                        {this.state.district.length ? (
+                          <Button
+                            block
+                            variant="success"
+                            href={this.state.formLink}
+                            target="blank"
+                            className="mb-2"
+                          >
+                            Notify Me when vaccines are available!
+                          </Button>
+                        ) : (
+                          ""
+                        )}
                         <Alert variant={"warning"}>
                           No centers found. Select city and district.
+                          <br />
                         </Alert>
                       </>
                     )}
