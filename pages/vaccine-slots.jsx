@@ -273,15 +273,20 @@ class VaccineSlots extends React.Component {
                     Choose State
                     <Form.Group>
                       <Typeahead
-                        id="basic-typeahead-multiple"
+                        id="basic-typeahead-multiple-state"
+                        clearButton
                         labelKey="state"
                         onChange={this.setStates}
+                        onClick={() => {
+                          console.log("click");
+                        }}
                         options={this.state.allStates}
                       />
                       Choose District
                       <Typeahead
-                        id="basic-typeahead-multiple"
+                        id="basic-typeahead-multiple-district"
                         labelKey="district"
+                        clearButton
                         onChange={this.setDistrict}
                         value={this.state.district}
                         options={this.state.allDistricts}
