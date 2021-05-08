@@ -197,6 +197,11 @@ This is a simple tool to find resources and leads in Twitter based on your city 
         })(window,document,'script','dataLayer','GTM-KFXF3TG');`,
             }}
           ></script>
+          <script
+            data-ad-client="ca-pub-9678197142380634"
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          ></script>
         </Head>
         {/* <NavBar /> */}
         <Container className="" fluild>
@@ -213,13 +218,18 @@ This is a simple tool to find resources and leads in Twitter based on your city 
                 based on your city or need.
               </p>
               <hr />
-                <p>
-                  Get vaccinated!
-                  Help the country to overcome this surge<br />
-              <Button variant="primary" href="/vaccine-slots" size="sm" className="">
+              <p>
+                Get vaccinated! Help the country to overcome this surge
+                <br />
+                <Button
+                  variant="primary"
+                  href="/vaccine-slots"
+                  size="sm"
+                  className=""
+                >
                   Check Vaccination Availability &rarr;
                 </Button>
-                </p>
+              </p>
               <hr></hr>
               <p>
                 <Alert variant="warning">
@@ -330,7 +340,13 @@ This is a simple tool to find resources and leads in Twitter based on your city 
           </Row>
         </Container>
 
-        <footer className="cntr-footer">© <a href="https://aaghran.com/">Aaghran Ghosh</a> - 2021</footer>
+        <footer className="cntr-footer">
+          <b>
+            Note - Ad revenue will be contributed to NGOs operating for covid19
+            relief.
+          </b>
+          © <a href="https://aaghran.com/">Aaghran Ghosh</a> - 2021
+        </footer>
       </Fragment>
     );
   }

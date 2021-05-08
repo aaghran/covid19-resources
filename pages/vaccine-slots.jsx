@@ -425,7 +425,10 @@ class VaccineSlots extends React.Component {
         </Container>
 
         <footer className="cntr-footer">
-          <b>Note - Ad revenue will be contributed to NGOs operating for covid19 relief.</b>
+          <b>
+            Note - Ad revenue will be contributed to NGOs operating for covid19
+            relief.
+          </b>
           <br />© <a href="https://aaghran.com/">Aaghran Ghosh</a> - 2021
         </footer>
       </Fragment>
