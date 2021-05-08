@@ -69,9 +69,12 @@ class VaccineSlots extends React.Component {
 
   setDistrict(district) {
     let param = district[0];
-    param = param.split("-");
+    let formLink = "";
+    if (param) {
+      param = param.split("-");
+      formLink = `https://docs.google.com/forms/d/e/1FAIpQLSdF2zjPVg3DJP3Q2niy17JD41wFtZqbUuirCJh7Wr33avh85A/viewform?usp=pp_url&entry.1667511934=District&entry.1484605708=${param[0]}`;
+    }
 
-    let formLink = `https://docs.google.com/forms/d/e/1FAIpQLSdF2zjPVg3DJP3Q2niy17JD41wFtZqbUuirCJh7Wr33avh85A/viewform?usp=pp_url&entry.1667511934=District&entry.1484605708=${param[0]}`;
     this.setState(
       {
         district,
@@ -295,6 +298,34 @@ class VaccineSlots extends React.Component {
 
               <Col sm="12" className="border p-4 rounded bg-white">
                 <Row>
+                  <Col sm="12">
+                    {!this.state.available18 && this.state.district.length ? (
+                      <Button
+                        block
+                        variant="danger"
+                        href={`${this.state.formLink}&entry.29570978=18`}
+                        target="blank"
+                        className="mb-2"
+                      >
+                        Notify Me for 18+
+                      </Button>
+                    ) : (
+                      ""
+                    )}
+                    {!this.state.available45 && this.state.district.length ? (
+                      <Button
+                        block
+                        variant="outline-warning"
+                        href={`${this.state.formLink}&entry.29570978=45`}
+                        target="blank"
+                        className="mt-2"
+                      >
+                        Notify Me for 45+
+                      </Button>
+                    ) : (
+                      ""
+                    )}
+                  </Col>
                   <Col
                     sm="12"
                     lg="4"
