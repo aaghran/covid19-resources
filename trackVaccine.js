@@ -93,7 +93,7 @@ async function getConfig() {
 
     config.forEach(function (value, key) {
       let conf = key.split("_");
-      console.log(conf);
+      // console.log(conf);
       // 294_District_18
       if (conf[1] == "District") {
         console.info(conf[0], value, [conf[2]]);
@@ -112,7 +112,7 @@ async function getConfig() {
 var cron = require("node-cron");
 console.log("task runner is ready");
 cron.schedule(
-  "5 * * * *",
+  "*/30 * * * *",
   () => {
     console.log("run task at", moment());
     getConfig();
