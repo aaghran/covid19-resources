@@ -90,6 +90,7 @@ async function getConfig() {
     });
     console.log("config is ---");
     console.log(config);
+    console.log("---");
 
     config.forEach(function (value, key) {
       let conf = key.split("_");
@@ -120,4 +121,4 @@ cron.schedule(
   { timezone: "Asia/Kolkata" }
 );
 
-// testGetSpreadSheet();
+getConfig();
