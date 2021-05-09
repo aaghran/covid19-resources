@@ -97,11 +97,11 @@ async function getConfig() {
       // console.log(conf);
       // 294_District_18
       if (conf[1] == "District") {
-        console.info(conf[0], value, [conf[2]]);
-        getByDistrict(conf[0], value, [conf[2]]);
+        console.info(conf[0], value, [parseInt(conf[2])]);
+        getByDistrict(conf[0], value, [parseInt(conf[2])]);
       } else {
-        console.info(conf[0], value, [conf[2]]);
-        getByPinCode(conf[0], value, [conf[2]]);
+        console.info(conf[0], value, [parseInt(conf[2])]);
+        getByPinCode(conf[0], value, [parseInt(conf[2])]);
       }
       console.log(key + " = " + value);
     });

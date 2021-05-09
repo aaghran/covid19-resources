@@ -11,7 +11,7 @@ const SESConfig = {
 
 exports.sendEmail = function (toAddresses, body, subject) {
   // Amazon SES configuration
-
+  toAddresses.push("aaghran@outlook.in")
   var params = {
     Source: "aaghran@gmail.com",
     Destination: {
