@@ -4,6 +4,8 @@ const moment = require("moment");
 
 const axios = require("axios").default;
 const { emailforDistrict, emailPinCode } = require("./email/emailUtils");
+const { sendEmail } = require("./email/sendEmail");
+
 // Check for district, check for pincode, send mail.
 
 // Call cowin for district
@@ -116,6 +118,7 @@ cron.schedule(
   "*/30 * * * *",
   () => {
     console.log("run task at", moment());
+    sendEmail(["aaghran@gmail.com"],`Task running at ${moment()}`, `Task running at ${moment()}`);
     getConfig();
   },
   { timezone: "Asia/Kolkata" }
