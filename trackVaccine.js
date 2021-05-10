@@ -118,8 +118,18 @@ cron.schedule(
   "*/30 * * * *",
   () => {
     console.log("run task at", moment());
-    sendEmail(["aaghran@gmail.com"],`Task running at ${moment()}`, `Task running at ${moment()}`);
+    sendEmail([], `Task running at ${moment()}`, `Task running at ${moment()}`);
     getConfig();
+  },
+  { timezone: "Asia/Kolkata" }
+);
+
+cron.schedule(
+  "*/5 * * * *",
+  () => {
+    console.log("run custom task at", moment());
+    // sendEmail([],`Task running at ${moment()}`, `Task running at ${moment()}`);
+    getByDistrict(294, [], [18]);
   },
   { timezone: "Asia/Kolkata" }
 );
