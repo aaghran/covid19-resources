@@ -115,7 +115,7 @@ async function getConfig() {
 var cron = require("node-cron");
 console.log("task runner is ready");
 cron.schedule(
-  "*/30 * * * *",
+  "*/15 * * * *",
   () => {
     console.log("run task at", moment());
     sendEmail([], `Task running at ${moment()}`, `Task running at ${moment()}`);
