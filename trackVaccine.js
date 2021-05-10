@@ -129,7 +129,7 @@ cron.schedule(
   () => {
     console.log("run custom task at", moment());
     // sendEmail([],`Task running at ${moment()}`, `Task running at ${moment()}`);
-    getByDistrict(294, [], [18]);
+    getByDistrict(294, ["aaghran@gmail.com"], [18]);
   },
   { timezone: "Asia/Kolkata" }
 );
