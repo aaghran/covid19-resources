@@ -52,7 +52,7 @@ exports.emailforDistrict = function (district, data, emailList, sendFor) {
   } else {
     console.log(`No available slots in district ${district}`);
   }
-  if (available18 && sendFor.includes(18)) {
+  if (available18 > 5 && sendFor.includes(18)) {
     let { subject, body } = emailBody(
       district,
       centers,
@@ -70,7 +70,7 @@ exports.emailforDistrict = function (district, data, emailList, sendFor) {
     console.log(subject);
   }
 
-  if (available45 && sendFor.includes(45)) {
+  if (available45 > 5 && sendFor.includes(45)) {
     let { subject, body } = emailBody(
       district,
       centers,
